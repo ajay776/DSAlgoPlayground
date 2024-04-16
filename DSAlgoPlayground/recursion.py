@@ -40,12 +40,13 @@ def get_fact(n: int):
 # print(get_fib_series(6))
 
 
-def climbStairs(n: int) -> int:
-    if n == 0 or n == 1:
-        return 1
-    return climbStairs(n-1) + climbStairs(n-2)
+""" --------------------------------PRACTISE SETS-------------------------------- """
+
+"""Question1:  check whether a passed integer is the power of three or not return True if it is a power of Three otherwise return False"""
 
 
-print(climbStairs(2))
-print(climbStairs(3))
-print(climbStairs(11))
+def power_of_three(num):
+    pass
+
+
+print(power_of_three(3))
