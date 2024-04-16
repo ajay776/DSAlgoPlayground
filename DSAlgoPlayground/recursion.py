@@ -24,17 +24,28 @@ def get_fact(n: int):
 # ---------------------------------------------#
 
 
-def get_fib_series(num):
-    if num >= 3:
-        return (get_fib_series(num-1) + get_fib_series(num-2))
-    else:
+# def get_fib_series(num):
+#     if num >= 3:
+#         return (get_fib_series(num-1) + get_fib_series(num-2))
+#     else:
+#         return 1
+
+
+# print(get_fib_series(10))
+# print(get_fib_series(1))
+# print(get_fib_series(2))
+# print(get_fib_series(3))
+# print(get_fib_series(4))
+# print(get_fib_series(5))
+# print(get_fib_series(6))
+
+
+def climbStairs(n: int) -> int:
+    if n == 0 or n == 1:
         return 1
+    return climbStairs(n-1) + climbStairs(n-2)
 
 
-print(get_fib_series(10))
-print(get_fib_series(1))
-print(get_fib_series(2))
-print(get_fib_series(3))
-print(get_fib_series(4))
-print(get_fib_series(5))
-print(get_fib_series(6))
+print(climbStairs(2))
+print(climbStairs(3))
+print(climbStairs(11))
