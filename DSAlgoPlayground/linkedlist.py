@@ -37,7 +37,7 @@ node1.nextNode = node2
 node2.nextNode = node3
 node3.nextNode = None
 
-print(find_maximum(node))
+# print(find_maximum(node))
 
 
 """------------------------------------------------PRACTICE  SETS ----------------------------------------------------"""
@@ -77,3 +77,84 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]):
 print(addTwoNumbers(l1, l2))
 
 """
+
+
+class Node:
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self, node):
+        self.node = node
+        self.current_node = self.node
+        self.last_node = None
+        self.return_array = []
+
+    def traverseList(self):
+        while self.current_node != None:
+            self.return_array.append(self.current_node.val)
+            self.current_node = self.current_node.next
+        return self.return_array
+
+    def insertElementAtEnd(self, node):
+        while self.current_node != None:
+            self.return_array.append(self.current_node.val)
+            self.last_node = self.current_node
+            self.current_node = self.current_node.next
+
+        else:
+            self.last_node.next = node
+            self.return_array.append(node.val)
+        return self.return_array
+
+    def insertElementAtStart(self, node):
+        node.next = self.node
+        self.current_node = node
+        while self.current_node != None:
+            self.return_array.append(self.current_node.val)
+            self.current_node = self.current_node.next
+        return self.return_array
+
+    def insertAtPostion(self, node, position):
+        if position == 1:
+            node.next = self.node
+            self.node = node
+        else:
+            count = 0
+            while count <= position:
+                import pdb
+                print(position, "--------------------------------------")
+
+                if count+1 == position:
+                    # pdb.set_trace()
+                    print(position, "--------------------------------------")
+                    splitted_node = self.current_node.next if self.current_node else None
+                    self.current_node.next = node
+                    self.current_node.next.next = splitted_node
+                count += 1
+        while self.current_node != None:
+            self.return_array.append(self.current_node.val)
+            self.current_node = self.current_node.next
+        return self.return_array
+
+
+a = Node(2)
+b = Node(4)
+c = Node(3)
+d = Node(5)
+a.next = b
+b.next = c
+c.next = d
+window_traverser = LinkedList(a)
+
+# print(window_traverser.traverseList())
+# print(window_traverser.insertElementAtEnd(Node(14)))
+# print(window_traverser.insertElementAtStart(Node(6)))
+# window_traverser.insertElementAtEnd(Node(0))
+# print(window_traverser.insertAtPostion(node=Node(3), position=2))
+print(window_traverser.insertAtPostion(Node(10), 4))
+
+
+# print(window_traverser.traverseList())
