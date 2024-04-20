@@ -37,7 +37,7 @@ node1.nextNode = node2
 node2.nextNode = node3
 node3.nextNode = None
 
-print(find_maximum(node))
+# print(find_maximum(node))
 
 
 """------------------------------------------------PRACTICE  SETS ----------------------------------------------------"""
@@ -88,55 +88,117 @@ class Node:
 class LinkedList:
     def __init__(self, node):
         self.node = node
-        self.current_node = self.node
-        self.last_node = None
-        self.return_array = []
 
     def traverseList(self):
-        while self.current_node != None:
-            self.return_array.append(self.current_node.val)
-            self.current_node = self.current_node.next
-        return self.return_array
+        return_array = []
+        current_node = self.node
+        while current_node:
+            return_array.append(current_node.val)
+            current_node = current_node.next
+        return return_array
 
     def insertElementAtEnd(self, node):
-        while self.current_node != None:
-            # self.return_array.append(self.current_node.val)
-            self.last_node = self.current_node
-            self.current_node = self.current_node.next
-
+        current_node = self.node
+        while current_node.next:
+            current_node = current_node.next if current_node.next else current_node
         else:
-            self.last_node.next = node
-            self.return_array.append(node.val)
-        return self.return_array
+            current_node.next = node
+        return self.traverseList()
 
     def insertElementAtStart(self, node):
         node.next = self.node
-        self.current_node = node
+        self.node= node
         return self.traverseList()
     
     def insertAtPostion(self, node, position):
-        if position == 1:
-            node.next = self.node
-            self.node = node
+        if position == 0:
+            return self.insertElementAtStart(node)
         else:
+            index_count = 0
+            current_node = self.node
+            while index_count<position and current_node:
+                if index_count +1 == position:
+                    node.next = current_node.next if current_node.next else None    
+                    current_node.next =  node
+                current_node = current_node.next
+                index_count +=1
+            result = self.traverseList()
+            if position> len(result):
+                raise ValueError("index out of range")
+        return result
+                
+    def deleteNodebyValue(self, value):
+        current_node = self.node
+
+        if current_node.val == value:
+            self.node = current_node.next
             return self.traverseList()
+        
+        prev_node = None
+        while current_node:
+            if current_node.val == value and prev_node !=None:
+                prev_node.next = current_node.next if current_node.next else None
+                return self.traverseList()
+            prev_node = current_node
+            current_node = current_node.next
+
+    def sortingChecker(self):
+        current_node = self.node
+        min_val = current_node.val
+        while current_node:
+            if min_val > current_node.next.val if current_node.next else None:
+                return False
+            current_node = current_node.next
+        return True
+
+    def removeDuplicates(self):
+        pass
+
+    def reverseLinkedList(self):
+        current_node = self.node
+        reverse_node = None
+        prev_node = None
+        
+        while current_node:
+            next_node = current_node.next if current_node.next else None
+            reverse_node = current_node
+            reverse_node.next = prev_node
+            prev_node = current_node
+            current_node = next_node
+        self.node = reverse_node
+        return self.traverseList()
+            
+
 
 
 a = Node(2)
-b = Node(4)
-c = Node(3)
-d = Node(5)
+c = Node(4)
+d = Node(3)
+b = Node(5)
 a.next = b
 b.next = c
 c.next = d
 window_traverser = LinkedList(a)
 
 # print(window_traverser.traverseList())
+
+"""inserting node's at the end with printing it """
 # print(window_traverser.insertElementAtEnd(Node(14)))
-# print(window_traverser.insertElementAtStart(Node(6)))
+# print(window_traverser.insertElementAtEnd(Node(19)))
+# print(window_traverser.insertElementAtEnd(Node(100)))
+
+
+
+# window_traverser.insertElementAtStart(Node(6))
+# window_traverser.insertElementAtStart(Node(7))
+# print(window_traverser.insertElementAtStart(Node(8)))
+
 # window_traverser.insertElementAtEnd(Node(0))
-# print(window_traverser.insertAtPostion(node=Node(3), position=2))
-print(window_traverser.insertAtPostion(Node(10), 4))
+# print(window_traverser.insertAtPostion(node=Node(50), position=0))
+# print(window_traverser.insertAtPostion(Node(10), 4))
+
+# print(window_traverser.deleteNodebyValue(50))
 
 
+print(window_traverser.sortingChecker())
 # print(window_traverser.traverseList())
