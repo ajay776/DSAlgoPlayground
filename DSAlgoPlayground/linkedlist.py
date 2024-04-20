@@ -37,7 +37,7 @@ node1.nextNode = node2
 node2.nextNode = node3
 node3.nextNode = None
 
-# print(find_maximum(node))
+print(find_maximum(node))
 
 
 """------------------------------------------------PRACTICE  SETS ----------------------------------------------------"""
@@ -80,7 +80,7 @@ print(addTwoNumbers(l1, l2))
 
 
 class Node:
-    def __init__(self, val, next=None):
+    def __init__(self, val):
         self.val = val
         self.next = None
 
@@ -100,7 +100,7 @@ class LinkedList:
 
     def insertElementAtEnd(self, node):
         while self.current_node != None:
-            self.return_array.append(self.current_node.val)
+            # self.return_array.append(self.current_node.val)
             self.last_node = self.current_node
             self.current_node = self.current_node.next
 
@@ -112,32 +112,14 @@ class LinkedList:
     def insertElementAtStart(self, node):
         node.next = self.node
         self.current_node = node
-        while self.current_node != None:
-            self.return_array.append(self.current_node.val)
-            self.current_node = self.current_node.next
-        return self.return_array
-
+        return self.traverseList()
+    
     def insertAtPostion(self, node, position):
         if position == 1:
             node.next = self.node
             self.node = node
         else:
-            count = 0
-            while count <= position:
-                import pdb
-                print(position, "--------------------------------------")
-
-                if count+1 == position:
-                    # pdb.set_trace()
-                    print(position, "--------------------------------------")
-                    splitted_node = self.current_node.next if self.current_node else None
-                    self.current_node.next = node
-                    self.current_node.next.next = splitted_node
-                count += 1
-        while self.current_node != None:
-            self.return_array.append(self.current_node.val)
-            self.current_node = self.current_node.next
-        return self.return_array
+            return self.traverseList()
 
 
 a = Node(2)
